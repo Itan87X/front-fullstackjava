@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <title> Spa & Hotel - Las magnolias </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+<a class="navbar-brand" href="#">
+  <img src="imagenes/logo.jpg" class="logo" alt="Logo Las magnolias">
+</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href="index.html">Inicio</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="nuestros-servicios.html">Nuestros servicios</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="preguntas-frecuentes.html">Preguntas frecuentes</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="sobre-nosotros.html">Sobre nosotros</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="contacto.html">Contacto</a>
+    </li>
+  </ul>
+</div>
+</nav>
+</header>
+
+    <br>
+    <div class="contact-container">
+      <form id="contact-form">
+      <div class="form-group">
+        <label for="name">Nombre *</label>
+        <input type="text" id="name" name="name" required placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required placeholder="correo@dominio.com">
+      </div>
+      <div class="form-group">
+        <label for="phone">Número de Teléfono Celular *</label>
+        <input type="tel" id="phone" name="phone" required placeholder="(xx)xxxx-xxxx">
+      </div>
+      <div class="form-group">
+        <label for="message">Mensaje *</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Preferencia de contacto *</label>
+        <div class="contact-preference">
+          <input type="radio" id="call" name="preference" value="call" required checked>
+          <label for="call">Llamada</label>
+          <input type="radio" id="whatsapp" name="preference" value="whatsapp" required>
+          <label for="whatsapp">WhatsApp</label>
+          <input type="radio" id="email-preference" name="preference" value="email" required>
+          <label for="email-preference">Email</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="newsletter">Recibir boletín de noticias:</label>
+        <input type="checkbox" id="newsletter" name="newsletter">
+      </div>
+      <div class="form-group">
+        <label for="novelties">Recibir novedades por:</label>
+        <select id="novelties" name="novelties">
+          <option value="email">Email</option>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="none">Ninguna</option>
+          <option value="ambas">Ambas</option>
+        </select>
+      </div>
+      <button type="submit" id="submit-button">Enviar</button>
+    </form>
+  </div>
+
+  <!-- Pie de página -->
+<footer>
+      <div class="footer-content">
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="nuestros-servicios.html">Nuestros servicios</a></li>
+          <li><a href="preguntas-frecuentes.html">Preguntas frecuentes</a></li>
+          <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+      <p>&copy; 2024 Spa & Hotel - Las magnolias</p>
+      </div>
+</footer>
+<script src="script.js"></script>
+  </body>
+  </html>
+  

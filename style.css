@@ -20,6 +20,10 @@ body {
     color: #A52A2A; /* Rosa oscuro */
 }
 
+.logo{
+    width: 50%;
+}
+
 /* Contenedor de textos principales*/
 .container {
     padding: 20px;

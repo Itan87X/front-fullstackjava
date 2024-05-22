@@ -17,6 +17,24 @@ document.addEventListener('DOMContentLoaded', function() {
   //   mainNav.classList.toggle('active');
   // });
 
+//para login
+
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita que el formulario se envíe
+
+    let username = document.getElementById('username').value.trim();
+    let password = document.getElementById('password').value.trim();
+    let errorMessage = document.getElementById('error-message');
+
+    if (username === '' || password === '') {
+        errorMessage.style.display = 'block';
+    } else {
+        errorMessage.style.display = 'none';
+        // window.location.href = 'otra_pagina.html';
+        alert('Inicio de sesión exitoso');
+    }
+});
+
   //para validar datos del formulario
 
   function validarFormulario() {

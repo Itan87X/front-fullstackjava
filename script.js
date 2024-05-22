@@ -37,8 +37,8 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 
 //para API
 
-const apiKey = 'TU_API_KEY_AQUI'; // Reemplaza esto con tu API key
-const city = 'Buenos Aires'; // Puedes cambiar esto por cualquier ciudad
+const apiKey = '1756ee3d5d8db48651990aeecc683673'; // Mi API key
+const city = 'Buenos Aires'; 
 
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=es`)
     .then(response => response.json())

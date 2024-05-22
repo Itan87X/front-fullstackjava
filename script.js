@@ -94,9 +94,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
       return false;
     }
 
-    // Resto del código para enviar el formulario o realizar otras acciones
-    // ...
-
     return true;
   }
 

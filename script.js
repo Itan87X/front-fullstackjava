@@ -37,28 +37,31 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 
 //para API
 
-const apiKey = '1756ee3d5d8db48651990aeecc683673'; // Mi API key
-const city = 'Buenos Aires'; 
+    const apiKey = '1756ee3d5d8db48651990aeecc683673'; // Mi API key
+    const city = 'Buenos Aires'; 
 
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=es`)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); // Ver los datos en la consola
-        mostrarDatosClima(data);
-    })
-    .catch(error => {
-        console.error('Error al obtener los datos de la API:', error);
-    });
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=es`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Ver los datos en la consola
+            mostrarDatosClima(data);
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos de la API:', error);
+        });
 
-function mostrarDatosClima(data) {
-    const apiDataContainer = document.getElementById('api-data');
-    apiDataContainer.innerHTML = `
-        <h3>Clima en ${data.name}</h3>
-        <p>Temperatura: ${data.main.temp}°C</p>
-        <p>Humedad: ${data.main.humidity}%</p>
-        <p>Condición: ${data.weather[0].description}</p>
-    `;
-}
+    function mostrarDatosClima(data) {
+        const apiDataContainer = document.getElementById('api-data');
+        if (apiDataContainer) {
+            apiDataContainer.innerHTML = `
+                <h3>Clima en ${data.name}</h3>
+                <p>Temperatura: ${data.main.temp}°C</p>
+                <p>Humedad: ${data.main.humidity}%</p>
+                <p>Condición: ${data.weather[0].description}</p>
+            `;
+        }
+    }
+});
 
   //para validar datos del formulario
 

@@ -374,6 +374,18 @@ p {
   transform: scale(1.1);
   color: white;
 }
+
+/* Estilos para la sección de conexión a API */
+#api-connection {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+#api-data {
+    margin-top: 10px;
+}
+
 /* Estilos del pie de página */
 
 footer {

@@ -35,6 +35,31 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     }
 });
 
+//para API
+
+const apiKey = 'TU_API_KEY_AQUI'; // Reemplaza esto con tu API key
+const city = 'Buenos Aires'; // Puedes cambiar esto por cualquier ciudad
+
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=es`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Ver los datos en la consola
+        mostrarDatosClima(data);
+    })
+    .catch(error => {
+        console.error('Error al obtener los datos de la API:', error);
+    });
+
+function mostrarDatosClima(data) {
+    const apiDataContainer = document.getElementById('api-data');
+    apiDataContainer.innerHTML = `
+        <h3>Clima en ${data.name}</h3>
+        <p>Temperatura: ${data.main.temp}°C</p>
+        <p>Humedad: ${data.main.humidity}%</p>
+        <p>Condición: ${data.weather[0].description}</p>
+    `;
+}
+
   //para validar datos del formulario
 
   function validarFormulario() {

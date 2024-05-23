@@ -184,6 +184,24 @@ p {
         padding-left: 0.8rem;
     }
 
+/*login */
+.centered-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /*altura*/
+}
+
+.centered-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+
+}
+
 /sección sobre nosotros/
 .container {
     background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */

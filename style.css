@@ -189,7 +189,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /*altura*/
+    height: 90%; /*altura*/
 }
 
 .centered-form {

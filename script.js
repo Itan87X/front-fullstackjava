@@ -1,4 +1,4 @@
- document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Mostrar/ocultar el menú desplegable
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.querySelector('.main-nav');
@@ -35,11 +35,17 @@
         }
     }
 
-    // Conexión a la API de Transporte
-    const clientId = 'da333521da76499f8c6a2fc98a462d93';
-    const clientSecret = 'b1C5E21fc4514aC09Cc17C5d4011708a';
+    // URL base de la API de transporte
+    const apiUrl = 'https://apitransporte.buenosaires.gob.ar/api/transporte/?client_id=da333521da76499f8c6a2fc98a462d93&client_secret=b1C5E21fc4514aC09Cc17C5d4011708a';
 
-    fetch(`https://apitransporte.buenosaires.gob.ar/api/transporte/?client_id=${clientId}&client_secret=${clientSecret}`)
+    // URL de CORS Anywhere
+    const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
+
+    // URL completa para hacer la solicitud
+    const fullUrl = corsAnywhereUrl + apiUrl;
+
+    // Conexión a la API de Transporte
+    fetch(fullUrl)
         .then(response => response.json())
         .then(data => {
             console.log(data); // Ver los datos en la consola
@@ -76,7 +82,6 @@
                 errorMessage.style.display = 'block';
             } else {
                 errorMessage.style.display = 'none';
-                // window.location.href = 'otra_pagina.html';
                 $('#successModal').modal('show'); // Mostrar el modal de Bootstrap
             }
         });
@@ -123,5 +128,7 @@
         return true;
     }
 });
+
+
 
 

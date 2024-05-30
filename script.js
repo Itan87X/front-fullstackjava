@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const clientId = 'da333521da76499f8c6a2fc98a462d93';
     const clientSecret = 'b1C5E21fc4514aC09Cc17C5d4011708a';
 
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // Utilizar un proxy para evitar problemas de CORS
     const apiBase = 'https://apitransporte.buenosaires.gob.ar/api';
     const endpoints = {
         subtesForecast: '/subtes/forecastGTFS',
@@ -53,14 +54,20 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     Object.keys(endpoints).forEach(key => {
-        fetch(`${apiBase}${endpoints[key]}?client_id=${clientId}&client_secret=${clientSecret}`)
-            .then(response => response.json())
+        fetch(`${proxyUrl}${apiBase}${endpoints[key]}?client_id=${clientId}&client_secret=${clientSecret}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 console.log(`${key}: `, data); // Ver los datos en la consola
                 mostrarDatosTransporte(key, data);
             })
             .catch(error => {
                 console.error(`Error al obtener los datos de la API de ${key}:`, error);
+                mostrarDatosTransporte(key, { error: error.message }); // Mostrar el error en el HTML
             });
     });
 
@@ -71,40 +78,39 @@ document.addEventListener('DOMContentLoaded', function() {
             switch (endpoint) {
                 case 'subtesForecast':
                     content = `<h3>Pronóstico Subtes</h3>
-                               <p>Trip ID: ${data.tripId}</p>
-                               <p>Arrival Time: ${data.arrivalTime}</p>`;
+                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
                     break;
                 case 'subtesServiceAlerts':
                     content = `<h3>Alertas de Servicio Subtes</h3>
-                               <p>Alert: ${data.alert}</p>`;
+                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
                     break;
                 case 'colectivosFeedGtfs':
                     content = `<h3>GTFS Colectivos</h3>
-                               <p>Feed Info: ${data.feedInfo}</p>`;
+                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
                     break;
                 case 'colectivosFeedGtfsFrequency':
                     content = `<h3>GTFS Frecuencia Colectivos</h3>
-                               <p>Frequency Info: ${data.frequencyInfo}</p>`;
+                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
                     break;
                 case 'colectivosServiceAlerts':
                     content = `<h3>Alertas de Servicio Colectivos</h3>
-                               <p>Alert: ${data.alert}</p>`;
+                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
                     break;
                 case 'ecobiciStationStatus':
                     content = `<h3>Estado de Estaciones Ecobici</h3>
-                               <p>Station: ${data.station}</p>`;
+                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
                     break;
                 case 'ecobiciStationInformation':
                     content = `<h3>Información de Estaciones Ecobici</h3>
-                               <p>Station Info: ${data.stationInfo}</p>`;
+                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
                     break;
                 case 'estacionamientos':
                     content = `<h3>Estacionamientos</h3>
-                               <p>Estacionamiento Info: ${data.estacionamientoInfo}</p>`;
+                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
                     break;
                 case 'garajesComerciales':
                     content = `<h3>Garajes Comerciales</h3>
-                               <p>Garaje Info: ${data.garajeInfo}</p>`;
+                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
                     break;
                 default:
                     content = '<p>No hay datos disponibles.</p>';
@@ -173,6 +179,4 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 });
-
-
 

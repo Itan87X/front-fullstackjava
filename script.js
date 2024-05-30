@@ -35,36 +35,81 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // URL base de la API de transporte
-    const apiUrl = 'https://apitransporte.buenosaires.gob.ar/api/transporte/?client_id=da333521da76499f8c6a2fc98a462d93&client_secret=b1C5E21fc4514aC09Cc17C5d4011708a';
-
-    // URL de CORS Anywhere
-    const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
-
-    // URL completa para hacer la solicitud
-    const fullUrl = corsAnywhereUrl + apiUrl;
-
     // Conexión a la API de Transporte
-    fetch(fullUrl)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); // Ver los datos en la consola
-            mostrarDatosTransporte(data);
-        })
-        .catch(error => {
-            console.error('Error al obtener los datos de la API de transporte:', error);
-        });
+    const clientId = 'da333521da76499f8c6a2fc98a462d93';
+    const clientSecret = 'b1C5E21fc4514aC09Cc17C5d4011708a';
 
-    function mostrarDatosTransporte(data) {
+    const apiBase = 'https://apitransporte.buenosaires.gob.ar/api';
+    const endpoints = {
+        subtesForecast: '/subtes/forecastGTFS',
+        subtesServiceAlerts: '/subtes/serviceAlerts',
+        colectivosFeedGtfs: '/colectivos/feed-gtfs',
+        colectivosFeedGtfsFrequency: '/colectivos/feed-gtfs-frequency',
+        colectivosServiceAlerts: '/colectivos/serviceAlerts',
+        ecobiciStationStatus: '/ecobici/gbfs/stationStatus',
+        ecobiciStationInformation: '/ecobici/gbfs/stationInformation',
+        estacionamientos: '/transito/v1/estacionamientos',
+        garajesComerciales: '/estacionamiento/garajesComerciales'
+    };
+
+    Object.keys(endpoints).forEach(key => {
+        fetch(`${apiBase}${endpoints[key]}?client_id=${clientId}&client_secret=${clientSecret}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(`${key}: `, data); // Ver los datos en la consola
+                mostrarDatosTransporte(key, data);
+            })
+            .catch(error => {
+                console.error(`Error al obtener los datos de la API de ${key}:`, error);
+            });
+    });
+
+    function mostrarDatosTransporte(endpoint, data) {
         const transportDataContainer = document.getElementById('transport-data');
         if (transportDataContainer) {
-            // Esto es solo un ejemplo, adapta según la estructura de los datos obtenidos
-            transportDataContainer.innerHTML = `
-                <h3>Transporte en Buenos Aires</h3>
-                <p>Dato 1: ${data.dato1}</p>
-                <p>Dato 2: ${data.dato2}</p>
-                <p>Dato 3: ${data.dato3}</p>
-            `;
+            let content = '';
+            switch (endpoint) {
+                case 'subtesForecast':
+                    content = `<h3>Pronóstico Subtes</h3>
+                               <p>Trip ID: ${data.tripId}</p>
+                               <p>Arrival Time: ${data.arrivalTime}</p>`;
+                    break;
+                case 'subtesServiceAlerts':
+                    content = `<h3>Alertas de Servicio Subtes</h3>
+                               <p>Alert: ${data.alert}</p>`;
+                    break;
+                case 'colectivosFeedGtfs':
+                    content = `<h3>GTFS Colectivos</h3>
+                               <p>Feed Info: ${data.feedInfo}</p>`;
+                    break;
+                case 'colectivosFeedGtfsFrequency':
+                    content = `<h3>GTFS Frecuencia Colectivos</h3>
+                               <p>Frequency Info: ${data.frequencyInfo}</p>`;
+                    break;
+                case 'colectivosServiceAlerts':
+                    content = `<h3>Alertas de Servicio Colectivos</h3>
+                               <p>Alert: ${data.alert}</p>`;
+                    break;
+                case 'ecobiciStationStatus':
+                    content = `<h3>Estado de Estaciones Ecobici</h3>
+                               <p>Station: ${data.station}</p>`;
+                    break;
+                case 'ecobiciStationInformation':
+                    content = `<h3>Información de Estaciones Ecobici</h3>
+                               <p>Station Info: ${data.stationInfo}</p>`;
+                    break;
+                case 'estacionamientos':
+                    content = `<h3>Estacionamientos</h3>
+                               <p>Estacionamiento Info: ${data.estacionamientoInfo}</p>`;
+                    break;
+                case 'garajesComerciales':
+                    content = `<h3>Garajes Comerciales</h3>
+                               <p>Garaje Info: ${data.garajeInfo}</p>`;
+                    break;
+                default:
+                    content = '<p>No hay datos disponibles.</p>';
+            }
+            transportDataContainer.innerHTML += content;
         }
     }
 
@@ -128,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 });
-
 
 
 

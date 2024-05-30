@@ -9,7 +9,7 @@
         });
     }
 
-    // Conexión a la API
+    // Conexión a la API del clima
     const apiKey = '1756ee3d5d8db48651990aeecc683673'; // Mi API key
     const city = 'Buenos Aires'; 
 
@@ -52,8 +52,7 @@
     function mostrarDatosTransporte(data) {
         const transportDataContainer = document.getElementById('transport-data');
         if (transportDataContainer) {
-            // Esto es solo un ejemplo, adapta según la estructura de los datos obtenidos
-            transportDataContainer.innerHTML = `
+              transportDataContainer.innerHTML = `
                 <h3>Transporte en Buenos Aires</h3>
                 <p>Dato 1: ${data.dato1}</p>
                 <p>Dato 2: ${data.dato2}</p>
@@ -61,6 +60,7 @@
             `;
         }
     }
+
   
     // Validación de formulario de inicio de sesión
     const loginForm = document.getElementById('loginForm');
@@ -82,6 +82,14 @@
         });
     }
 
+    // Redirigir al hacer clic en el botón "Aceptar" del modal
+    const redirectBtn = document.getElementById('redirectBtn');
+    if (redirectBtn) {
+        redirectBtn.addEventListener('click', function() {
+            window.location.href = 'transporte.html'; 
+        });
+    }  
+  
     // Validación de datos del formulario
     function validarFormulario() {
         var nameInput = document.getElementById('name');

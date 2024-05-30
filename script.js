@@ -76,6 +76,7 @@
                 errorMessage.style.display = 'block';
             } else {
                 errorMessage.style.display = 'none';
+                // window.location.href = 'otra_pagina.html';
                 $('#successModal').modal('show'); // Mostrar el modal de Bootstrap
             }
         });

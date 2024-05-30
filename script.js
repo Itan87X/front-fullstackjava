@@ -35,6 +35,33 @@
         }
     }
 
+  // Conexión a la API de Transporte
+    const clientId = 'da333521da76499f8c6a2fc98a462d93';
+    const clientSecret = 'b1C5E21fc4514aC09Cc17C5d4011708a';
+
+    fetch(`https://apitransporte.buenosaires.gob.ar/api/transporte/?client_id=${clientId}&client_secret=${clientSecret}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Ver los datos en la consola
+            mostrarDatosTransporte(data);
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos de la API de transporte:', error);
+        });
+
+    function mostrarDatosTransporte(data) {
+        const transportDataContainer = document.getElementById('transport-data');
+        if (transportDataContainer) {
+            // Esto es solo un ejemplo, adapta según la estructura de los datos obtenidos
+            transportDataContainer.innerHTML = `
+                <h3>Transporte en Buenos Aires</h3>
+                <p>Dato 1: ${data.dato1}</p>
+                <p>Dato 2: ${data.dato2}</p>
+                <p>Dato 3: ${data.dato3}</p>
+            `;
+        }
+    }
+  
     // Validación de formulario de inicio de sesión
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {

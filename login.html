@@ -1,3 +1,4 @@
+<!-- Resto del HTML sigue igual -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,6 +62,27 @@
         <p id="error-message" class="text-danger" style="display: none;">Por favor, complete ambos campos.</p>
     </div>
 </section>
+
+<!-- Modal de inicio de sesión exitoso -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Inicio de sesión exitoso</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¡Inicio de sesión exitoso! ¿Quieres ir a la página de transporte?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="redirectBtn">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Pie de página -->
 <footer>

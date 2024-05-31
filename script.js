@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Conexión a la API de Transporte
+    // Conexión a la API de Transporte mediante un proxy CORS
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // Proxy CORS
     const clientId = 'da333521da76499f8c6a2fc98a462d93';
     const clientSecret = 'b1C5E21fc4514aC09Cc17C5d4011708a';
 
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // Utilizar un proxy para evitar problemas de CORS
     const apiBase = 'https://apitransporte.buenosaires.gob.ar/api';
     const endpoints = {
         subtesForecast: '/subtes/forecastGTFS',
@@ -55,19 +55,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     Object.keys(endpoints).forEach(key => {
         fetch(`${proxyUrl}${apiBase}${endpoints[key]}?client_id=${clientId}&client_secret=${clientSecret}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.status} ${response.statusText}`);
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 console.log(`${key}: `, data); // Ver los datos en la consola
                 mostrarDatosTransporte(key, data);
             })
             .catch(error => {
                 console.error(`Error al obtener los datos de la API de ${key}:`, error);
-                mostrarDatosTransporte(key, { error: error.message }); // Mostrar el error en el HTML
             });
     });
 
@@ -78,39 +72,40 @@ document.addEventListener('DOMContentLoaded', function() {
             switch (endpoint) {
                 case 'subtesForecast':
                     content = `<h3>Pronóstico Subtes</h3>
-                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                               <p>Trip ID: ${data.tripId}</p>
+                               <p>Arrival Time: ${data.arrivalTime}</p>`;
                     break;
                 case 'subtesServiceAlerts':
                     content = `<h3>Alertas de Servicio Subtes</h3>
-                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                               <p>Alert: ${data.alert}</p>`;
                     break;
                 case 'colectivosFeedGtfs':
                     content = `<h3>GTFS Colectivos</h3>
-                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                               <p>Feed Info: ${data.feedInfo}</p>`;
                     break;
                 case 'colectivosFeedGtfsFrequency':
                     content = `<h3>GTFS Frecuencia Colectivos</h3>
-                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                               <p>Frequency Info: ${data.frequencyInfo}</p>`;
                     break;
                 case 'colectivosServiceAlerts':
                     content = `<h3>Alertas de Servicio Colectivos</h3>
-                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                               <p>Alert: ${data.alert}</p>`;
                     break;
                 case 'ecobiciStationStatus':
                     content = `<h3>Estado de Estaciones Ecobici</h3>
-                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                               <p>Station: ${data.station}</p>`;
                     break;
                 case 'ecobiciStationInformation':
                     content = `<h3>Información de Estaciones Ecobici</h3>
-                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                               <p>Station Info: ${data.stationInfo}</p>`;
                     break;
                 case 'estacionamientos':
                     content = `<h3>Estacionamientos</h3>
-                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                               <p>Estacionamiento Info: ${data.estacionamientoInfo}</p>`;
                     break;
                 case 'garajesComerciales':
                     content = `<h3>Garajes Comerciales</h3>
-                               <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                               <p>Garaje Info: ${data.garajeInfo}</p>`;
                     break;
                 default:
                     content = '<p>No hay datos disponibles.</p>';
@@ -145,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'transporte.html'; // URL de la página que consume la API de transporte
         });
     }
-
+    
     // Validación de datos del formulario
     function validarFormulario() {
         var nameInput = document.getElementById('name');

@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Conexión a la API de Open Exchange Rates para obtener los datos de cambio de divisas
-    const exchangeRatesApiKey = '840040ed7a074fe584dd99d44ace976f'; // Tu API key de Open Exchange Rates
+    const exchangeRatesApiKey = '840040ed7a074fe584dd99d44ace976f'; // API key de Open Exchange Rates
     const apiUrl = `https://open.er-api.com/v6/latest/${exchangeRatesApiKey}`;
 
     fetch(apiUrl)
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const redirectBtn = document.getElementById('redirectBtn');
     if (redirectBtn) {
         redirectBtn.addEventListener('click', function() {
-            window.location.href = 'transporte.html'; // URL de la página que consume la API de transporte
+            window.location.href = 'divisas.html'; // URL de la página que consume la API de divisas
         });
     }
     

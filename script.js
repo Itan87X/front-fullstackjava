@@ -49,18 +49,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     function mostrarDatosUsuarios(data) {
-    const usersContainer = document.getElementById('users-data');
-    if (usersContainer) {
-        usersContainer.innerHTML = '<h2>Usuarios</h2>';
-        const users = data.data || []; // Si data.data es undefined, asigna un array vacío
-        users.forEach(user => {
-            const userDiv = document.createElement('div');
-            userDiv.textContent = `${user.first_name} ${user.last_name} - ${user.email}`;
-            usersContainer.appendChild(userDiv);
-        });
+        const usersContainer = document.getElementById('users-data');
+        if (usersContainer && data.data) {
+            usersContainer.innerHTML = '<h2>Usuarios</h2>';
+            data.data.forEach(user => {
+                const userDiv = document.createElement('div');
+                userDiv.textContent = `${user.first_name} ${user.last_name} - ${user.email}`;
+                usersContainer.appendChild(userDiv);
+            });
+        }
     }
-}
-
 
     // Función para agregar un usuario
     const addUserForm = document.getElementById('addUserForm');
@@ -83,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 console.log('Usuario agregado:', data);
                 mostrarDatosUsuarios(data);
+                addUserForm.reset(); // Limpiar campos del formulario
             })
             .catch(error => {
                 console.error('Error al agregar el usuario:', error);
@@ -112,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 console.log('Usuario actualizado:', data);
                 mostrarDatosUsuarios(data);
+                updateUserForm.reset(); // Limpiar campos del formulario
             })
             .catch(error => {
                 console.error('Error al actualizar el usuario:', error);

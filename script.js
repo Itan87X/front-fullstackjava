@@ -49,24 +49,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     function mostrarDatosUsuarios(data) {
-    const usersContainer = document.getElementById('users-data');
-    if (usersContainer) {
-        usersContainer.innerHTML = '<h2>Usuarios</h2>';
-        if (data.hasOwnProperty('data')) {
+        const usersContainer = document.getElementById('users-data');
+        if (usersContainer) {
+            usersContainer.innerHTML = '<h2>Usuarios</h2>';
             data.data.forEach(user => {
                 const userDiv = document.createElement('div');
-                userDiv.innerHTML = `
-                    ${user.first_name} ${user.last_name} - ${user.email}
-                    <button class="btn btn-warning btn-sm" onclick="actualizarUsuario(${user.id})">Actualizar</button>
-                    <button class="btn btn-danger btn-sm" onclick="eliminarUsuario(${user.id})">Eliminar</button>
-                `;
+                userDiv.textContent = `${user.first_name} ${user.last_name} - ${user.email}`;
                 usersContainer.appendChild(userDiv);
             });
-        } else {
-            console.error('La respuesta de la API no contiene la propiedad "data".', data);
         }
     }
-}
 
     // Función para agregar un usuario
     const addUserForm = document.getElementById('addUserForm');

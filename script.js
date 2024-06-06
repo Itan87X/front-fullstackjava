@@ -60,6 +60,92 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Función para agregar un usuario
+    const addUserForm = document.getElementById('addUserForm');
+    if (addUserForm) {
+        addUserForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+
+            fetch('https://reqres.in/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ first_name: firstName, last_name: lastName, email: email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Usuario agregado:', data);
+                mostrarDatosUsuarios(data);
+            })
+            .catch(error => {
+                console.error('Error al agregar el usuario:', error);
+            });
+        });
+    }
+
+    // Función para actualizar un usuario
+    const updateUserForm = document.getElementById('updateUserForm');
+    if (updateUserForm) {
+        updateUserForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const userId = document.getElementById('userId').value;
+            const firstName = document.getElementById('updateFirstName').value;
+            const lastName = document.getElementById('updateLastName').value;
+            const email = document.getElementById('updateEmail').value;
+
+            fetch(`https://reqres.in/api/users/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ first_name: firstName, last_name: lastName, email: email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Usuario actualizado:', data);
+                mostrarDatosUsuarios(data);
+            })
+            .catch(error => {
+                console.error('Error al actualizar el usuario:', error);
+            });
+        });
+    }
+
+    // Función para eliminar un usuario
+    const deleteUserForm = document.getElementById('deleteUserForm');
+    if (deleteUserForm) {
+        deleteUserForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const userId = document.getElementById('deleteUserId').value;
+
+            fetch(`https://reqres.in/api/users/${userId}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Usuario eliminado');
+                    // Actualizar la lista de usuarios
+                    fetch(reqresApiUrl)
+                        .then(response => response.json())
+                        .then(data => mostrarDatosUsuarios(data))
+                        .catch(error => console.error('Error al actualizar la lista de usuarios:', error));
+                } else {
+                    console.error('Error al eliminar el usuario');
+                }
+            })
+            .catch(error => {
+                console.error('Error al eliminar el usuario:', error);
+            });
+        });
+    }
+
     // Validación de formulario de inicio de sesión
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
@@ -83,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const redirectBtn = document.getElementById('redirectBtn');
     if (redirectBtn) {
         redirectBtn.addEventListener('click', function() {
-            window.location.href = 'api.html'; // URL de la página que consume la API de reqres
+            window.location.href = 'divisas.html'; // URL de la página que consume la API de divisas
         });
     }
     

@@ -35,31 +35,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Conexión a la API de Open Exchange Rates para obtener los datos de cambio de divisas
-    const exchangeRatesApiKey = '840040ed7a074fe584dd99d44ace976f'; // API key de Open Exchange Rates
-    const apiUrl = `https://open.er-api.com/v6/latest/${exchangeRatesApiKey}`;
+    // Conexión a la API de Reqres para obtener usuarios
+    const reqresApiUrl = 'https://reqres.in/api/users';
 
-    fetch(apiUrl)
+    fetch(reqresApiUrl)
         .then(response => response.json())
         .then(data => {
             console.log(data); // Ver los datos en la consola
-            mostrarDatosDivisas(data);
+            mostrarDatosUsuarios(data);
         })
         .catch(error => {
-            console.error('Error al obtener los datos de cambio de divisas:', error);
+            console.error('Error al obtener los datos de usuarios:', error);
         });
 
-    function mostrarDatosDivisas(data) {
-        const exchangeRatesContainer = document.getElementById('exchange-rates-data');
-        if (exchangeRatesContainer) {
-            // Aquí puedes acceder a los datos de cambio de divisas en 'data'
-            // y mostrar la información en el HTML como desees
-            exchangeRatesContainer.innerHTML = `
-                <h2>Tasas de Cambio de Divisas</h2>
-                <p>EUR to USD: ${data.rates.USD}</p>
-                <p>EUR to GBP: ${data.rates.GBP}</p>
-                <!-- Agrega más conversiones de moneda según sea necesario -->
-            `;
+    function mostrarDatosUsuarios(data) {
+        const usersContainer = document.getElementById('users-data');
+        if (usersContainer) {
+            usersContainer.innerHTML = '<h2>Usuarios</h2>';
+            data.data.forEach(user => {
+                const userDiv = document.createElement('div');
+                userDiv.textContent = `${user.first_name} ${user.last_name} - ${user.email}`;
+                usersContainer.appendChild(userDiv);
+            });
         }
     }
 
@@ -123,3 +120,4 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 });
+

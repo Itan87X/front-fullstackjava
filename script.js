@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const redirectBtn = document.getElementById('redirectBtn');
     if (redirectBtn) {
         redirectBtn.addEventListener('click', function() {
-            window.location.href = 'divisas.html'; // URL de la página que consume la API de divisas
+            window.location.href = 'api.html'; // URL de la página que consume la API de reqres
         });
     }
     
